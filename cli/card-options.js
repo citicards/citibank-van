@@ -21,6 +21,8 @@ function cardOptionsPrompt(app) {
 
   return app.prompt(chooseCreditCardOptionList).then((cardSelectPrompt) => {
     switch(cardSelectPrompt.optionSelected) {
+    case 1:
+      return app.van.generateCard(app.selectedCard);
     default:
       return app.displayCardSelectPrompt(app);
     }

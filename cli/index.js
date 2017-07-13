@@ -15,7 +15,7 @@ class App {
     this.prompt = prompt;
   }
   handleError(functionName) {
-    return (error) => console.error(chalk.red(`An Error Occured in ${functionName}`), error);
+    return (error) => console.error(chalk.red(`An Error Occured on ${functionName}\n`), error);
   }
   init() {
     return this.displayLoginPrompt().catch(this.handleError('Unknown'));

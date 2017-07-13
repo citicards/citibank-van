@@ -21,7 +21,7 @@ function cardSelectPrompt(app) {
       return app.exitSelected();
     }
     app.selectedCardNumber = cardPromptResults.selectedCardNumber;
-    app.selectedCardNumber = app.selectedCardNumber[cardPromptResults.selectedCardNumber];
+    app.selectedCard = app.cards[app.selectedCardNumber];
     return app.displayCardOptionsPrompt(app);
   });
 }
