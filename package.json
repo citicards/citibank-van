@@ -1,0 +1,32 @@
+{
+  "name": "citibank-van",
+  "version": "0.0.1",
+  "description": "Citibank Virtual Account Number Generator for NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "citibank",
+    "citicards",
+    "van",
+    "virtual",
+    "account",
+    "number",
+    "citi",
+    "card",
+    "bank"
+  ],
+  "author": "ThomasJMeadows",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "inquirer": "^3.2.0"
+  },
+  "bin": {
+    "citibank-van": "cli/index.js"
+  },
+  "devDependencies": {
+    "eslint": "^4.2.0"
+  }
+}
