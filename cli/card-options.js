@@ -11,18 +11,14 @@ function cardOptionsPrompt(app) {
       {
         name: '  Generate New Virtual Account Number',
         value: 1
-      },
-      {
-        name: '  View Active Numbers',
-        value: 2
-      },
+      }
     ]
   };
 
   return app.prompt(chooseCreditCardOptionList).then((cardSelectPrompt) => {
     switch(cardSelectPrompt.optionSelected) {
     case 1:
-      return app.van.generateCard(app.selectedCard);
+      return app.van.generateVanForACreditCard(app.selectedCard);
     default:
       return app.displayCardSelectPrompt(app);
     }
