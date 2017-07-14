@@ -6,12 +6,12 @@ function cardSelectPrompt(app) {
     choices: []
   };
   chooseCreditCardList.choices.push({
-    name: '<-- Exit',
+    name: app.chalk.yellow('<-- Exit'),
     value: null
   });
-  app.cards.forEach((card, i) => {
+  app.creditCards.forEach((card, i) => {
     chooseCreditCardList.choices.push({
-      name: `  ${card.cardholdersName} ############${String(card.lastFourOfCardNumber)}`,
+      name: app.chalk.cyan(`  ${card.CardholderName} ############${String(card.PAN)}`),
       value: i
     });
   });
@@ -21,7 +21,7 @@ function cardSelectPrompt(app) {
       return app.exitSelected();
     }
     app.selectedCardNumber = cardPromptResults.selectedCardNumber;
-    app.selectedCard = app.cards[app.selectedCardNumber];
+    app.selectedCard = app.creditCards[app.selectedCardNumber];
     return app.displayCardOptionsPrompt(app);
   });
 }

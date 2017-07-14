@@ -2,7 +2,7 @@
   "name": "citibank-van",
   "version": "0.0.1",
   "description": "Citibank Virtual Account Number Generator for NodeJS",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,8 +21,12 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.16.2",
+    "bluebird": "^3.5.0",
     "inquirer": "^3.2.0",
     "ip": "^1.1.5"
+  },
+  "engines" : {
+    "node" : ">=6.0"
   },
   "bin": {
     "citibank-van": "cli/index.js"

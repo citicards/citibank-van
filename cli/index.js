@@ -1,18 +1,20 @@
 #! /usr/bin/env node
 const chalk = require('chalk');
 const inquirer = require('inquirer');
-const prompt = inquirer.createPromptModule();
 
 const CitibankVAN = require('../index.js');
 const loginPrompt = require('./login');
 const cardSelectPrompt = require('./card-select');
 const cardOptionsPrompt = require('./card-options');
+const serviceVanPrompt = require('./service-van');
+const twoFactorPrompt = require('./two-factor');
 
 class App {
   constructor() {
     this.van = new CitibankVAN();
     this.chalk = chalk;
-    this.prompt = prompt;
+    this.inquirer = inquirer;
+    this.prompt = inquirer.createPromptModule();
   }
   handleError(functionName) {
     return (error) => console.error(chalk.red(`An Error Occured on ${functionName}\n`), error);
@@ -20,11 +22,17 @@ class App {
   init() {
     return this.displayLoginPrompt().catch(this.handleError('Unknown'));
   }
+  displayServiceVanPrompt() {
+    return serviceVanPrompt(this).catch(this.handleError('editVanPrompt'));
+  }
   displayLoginPrompt() {
     return loginPrompt(this).catch(this.handleError('loginPrompt'));
   }
   displayCardSelectPrompt() {
     return cardSelectPrompt(this).catch(this.handleError('cardSelectPrompt'));
+  }
+  displayTwoFactorPrompt(twoFactorObject) {
+    return twoFactorPrompt(this, twoFactorObject).catch(this.handleError('cardSelectPrompt'));
   }
   displayCardOptionsPrompt() {
     return cardOptionsPrompt(this).catch(this.handleError('cardOptionsPrompt'));

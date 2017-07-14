@@ -11,10 +11,11 @@ function loginPrompt(app) {
       name: 'password'
     }
   ]).then((userPromptResults) => {
+    console.log(app.chalk.yellow('...getting all creditcards and active vans for each creditcard'));
     return app.van.login(userPromptResults.username, userPromptResults.password)
-      .then((cards) => {
-        app.cards = cards;
+      .then((creditCards) => {
         console.log(app.chalk.green('logged in successfully'));
+        app.creditCards = creditCards;
         return app.displayCardSelectPrompt(app);
       });
   });
