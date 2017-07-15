@@ -1,4 +1,8 @@
+[![NPM](https://nodei.co/npm/citibank-van.png)](https://npmjs.org/package/citibank-van)
+
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
+[![Build Status](https://semaphoreci.com/api/v1/thomasmeadows/citibank-van/branches/master/badge.svg)](https://semaphoreci.com/thomasmeadows/citibank-van)
 
 ![Citibank Virtual Account Numbers CLI](https://raw.githubusercontent.com/thomasmeadows/citibank-van/master/cli.gif)
 
