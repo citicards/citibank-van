@@ -9,12 +9,20 @@ function cardOptionsPrompt(app) {
         value: 'back'
       },
       {
-        name: app.chalk.cyan('  Generate New Virtual Account Number'),
-        value: 'generate-default'
+        name: app.chalk.cyan('  Generate New Virtual Account Number with no limits'),
+        value: 'generate-van-no-limits'
+      },
+      {
+        name: app.chalk.cyan('  Generate New Virtual Account Number with limits'),
+        value: 'generate-van-with-limits'
       },
       new app.inquirer.Separator(app.chalk.green('----Active Vans----'))
     ]
   };
+
+  if (!app.selectedCard.ActiveVans || !app.selectedCard.ActiveVans.length) {
+    chooseCreditCardOptionList.choices.push(new app.inquirer.Separator(app.chalk.green('  No Active Vans Found')));
+  }
 
   app.selectedCard.ActiveVans.forEach((van, i) => {
     let color = app.chalk.green;
@@ -28,7 +36,8 @@ function cardOptionsPrompt(app) {
   });
 
   return app.prompt(chooseCreditCardOptionList).then((cardSelectPrompt) => {
-    if (cardSelectPrompt.optionSelected === 'generate-default') {
+    switch(cardSelectPrompt.optionSelected) {
+    case 'generate-van-no-limits':
       return app.van.generateVanForACreditCard(app.selectedCard).then(results => {
         if (results.twoFactorNeeded) {
           return app.displayTwoFactorPrompt(results).then(() => app.van.generateVanForACreditCard(app.selectedCard));
@@ -36,13 +45,16 @@ function cardOptionsPrompt(app) {
         return results;
       }).then(newcard => {
         console.log(app.chalk.green(`\n---new card generated--\n\n  ${newcard.PAN} EXP: ${newcard.Expiry} CVV: ${newcard.AVV} \n\n`));
-        return cardOptionsPrompt(app);
+        return app.displayCardOptionsPrompt();
       });
-    } else if (!isNaN(cardSelectPrompt.optionSelected)) {
+    case 'generate-van-with-limits':
+      return app.displayGenerateVanWithLimitsPrompt();
+    case 'back':
+      return app.displayCardSelectPrompt();
+    default:
       app.selectedVan = app.selectedCard.ActiveVans[Number(cardSelectPrompt.optionSelected)];
       return app.displayServiceVanPrompt();
     }
-    return app.displayCardSelectPrompt();
   });
 }
 

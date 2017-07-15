@@ -8,6 +8,7 @@ const cardSelectPrompt = require('./card-select');
 const cardOptionsPrompt = require('./card-options');
 const serviceVanPrompt = require('./service-van');
 const twoFactorPrompt = require('./two-factor');
+const generateVanWithLimitsPrompt = require('./generate-van-with-limits');
 
 class App {
   constructor() {
@@ -36,6 +37,9 @@ class App {
   }
   displayCardOptionsPrompt() {
     return cardOptionsPrompt(this).catch(this.handleError('cardOptionsPrompt'));
+  }
+  displayGenerateVanWithLimitsPrompt() {
+    return generateVanWithLimitsPrompt(this);
   }
   exitSelected() {
     console.log(chalk.green('Goodbye'));
