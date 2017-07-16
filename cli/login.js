@@ -1,23 +1,34 @@
+const {
+  LOGGING_IN,
+  LOGIN_SUCCESS,
+  PROMPT_TYPE,
+  PASSWORD,
+  USERNAME
+} = require('./.constants');
+
 function loginPrompt(app) {
   return app.prompt([
     {
-      type: 'input',
-      message: 'username',
-      name: 'username'
+      type: PROMPT_TYPE.INPUT,
+      message: USERNAME,
+      name: USERNAME
     },
     {
-      type: 'password',
-      message: 'password',
-      name: 'password'
+      type: PROMPT_TYPE.PASSWORD,
+      message: PASSWORD,
+      name: PASSWORD
     }
-  ]).then((userPromptResults) => {
-    console.log(app.chalk.yellow('...getting all creditcards and active vans for each creditcard'));
-    return app.van.login(userPromptResults.username, userPromptResults.password)
-      .then((creditCards) => {
-        console.log(app.chalk.green('logged in successfully'));
-        app.creditCards = creditCards;
-        return app.displayCardSelectPrompt(app);
-      });
+  ]).then((promptResponse) => {
+    app.log.warn(LOGGING_IN);
+
+    return app.van.login(
+      promptResponse.USERNAME,
+      promptResponse.PASSWORD
+    ).then((creditCards) => {
+      app.log.success(LOGIN_SUCCESS);
+      app.creditCards = creditCards;
+      return app.displayCardSelectPrompt(app);
+    });
   });
 };
 

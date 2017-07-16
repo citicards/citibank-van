@@ -4,7 +4,8 @@
   "description": "Citibank Virtual Account Number Generator for NodeJS",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava test/cli test/lib --tap | tap-nyan",
+    "test-verbose": "ava test/cli test/lib --verbose"
   },
   "keywords": [
     "citibank",
@@ -25,13 +26,17 @@
     "inquirer": "^3.2.0",
     "ip": "^1.1.5"
   },
-  "engines" : {
-    "node" : ">=6.0"
+  "engines": {
+    "node": ">=6.0"
   },
   "bin": {
     "citibank-van": "cli/index.js"
   },
   "devDependencies": {
-    "eslint": "^4.2.0"
+    "ava": "^0.21.0",
+    "eslint": "^4.2.0",
+    "nock": "^9.0.13",
+    "require-dir": "^0.3.2",
+    "tap-nyan": "^1.1.0"
   }
 }

@@ -1,3 +1,5 @@
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
 # Citibank Virtual Account Number Generator and Servicer
 
 Citibank and Citicards.com virtual account number generator for node js.  This tool was created so that virtual account numbers could be generated using an api or with the cli.  This is an unofficial tool not created by citibank and they should not be contacted for any issues regarding the tool.
@@ -38,9 +40,29 @@ const app = new CitibankVan();
 
 app.login('username', 'password')
 .then(creditCards => {
-  return app.generateVanForACreditCard(creditCards[0])
-  .then(newVanCreated => {
-    console.log(newVanCreated);
-  });
+  console.log(creditCards); // contains all users credit cards and vans attached
+  return app.checkIfTwoFactorNeeded()
+  .then(twoFactor) {
+    // sometimes two factor is needed to generate virtual account numbers
+    if(!twoFactor.twoFactorNeeded) {
+      return app.generateVanForACreditCard(creditCards[0])
+      .then(newVanCreated => {
+        console.log(newVanCreated);
+      });
+    }
+    // process two factor(needs to be presented to user, see cli app for example, sudo example below)
+    console.log(twoFactor.verifyMethods);
+    return twoFactor.selectVerifyMethod(verifyMethods[0])
+    .then(() => {
+      twoFactor.verifyCode(someCodeVariableGivenByUser)
+      .then(() => {
+        return app.generateVanForACreditCard(creditCards[0])
+        .then(newVanCreated => {
+          console.log(newVanCreated);
+        });
+      });
+    });
+    // end sudo example
+  }
 });
 ```

@@ -1,9 +1,17 @@
+const {
+  PROMPT_TYPE,
+  LIST_ITEM_SELECTED,
+  MENU_TITLE,
+  MENU_VALUE,
+  MENU_TEXT
+} = require('./.constants');
+
 function twoFactorVerifyCodePrompt(app, twoFactor) {
   return app.prompt([
     {
-      type: 'input',
-      message: 'Enter the code you received',
-      name: 'code'
+      type: PROMPT_TYPE.INPUT,
+      message: MENU_TITLE.ENTER_CODE_RECEIVED,
+      name: MENU_VALUE.CODE
     },
   ]).then((userPromptResults) => {
     return twoFactor.verifyCode(userPromptResults.code);
@@ -12,24 +20,33 @@ function twoFactorVerifyCodePrompt(app, twoFactor) {
 
 function twoFactorPrompt(app, twoFactor) {
   const chooseVerifyMethodList = {
-    type: 'list',
-    name: 'selectedOption',
-    message: 'Which credit card do you want to service VAN\'s for?',
-    choices: []
+    type: PROMPT_TYPE.LIST,
+    name: LIST_ITEM_SELECTED,
+    message: MENU_TITLE.SELECT_CREDIT_CARD,
+    choices: [
+      {
+        name: app.chalk.yellow(MENU_TEXT.BACK),
+        value: MENU_VALUE.BACK
+      },
+    ]
   };
   twoFactor.verifyMethods.forEach(method => {
     chooseVerifyMethodList.choices.push({
-      name: method.Text,
+      name: `  ${method.Text}`,
       value: method.Id
     });
   });
 
-  return app.prompt(chooseVerifyMethodList).then((methodSelected) => {
-    return twoFactor.selectVerifyMethod(methodSelected.selectedOption).then(() => {
+  return app.prompt(chooseVerifyMethodList).then((promptResponse) => {
+    if(promptResponse[LIST_ITEM_SELECTED] === MENU_VALUE.BACK) {
+      return app.displayCardOptionsPrompt();
+    }
+    const method = twoFactor.verifyMethods.find((item) => item.Id === promptResponse[LIST_ITEM_SELECTED]);
+    return twoFactor.selectVerifyMethod(method).then(() => {
       return twoFactorVerifyCodePrompt(app, twoFactor).catch(e => {
-        console.log(e);
+        app.log.error(e);
         return twoFactorVerifyCodePrompt(app, twoFactor).catch(e2 => {
-          console.log(e2);
+          app.log.error(e2);
           return twoFactorVerifyCodePrompt(app, twoFactor);
         });
       });

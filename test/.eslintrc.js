@@ -4,10 +4,15 @@ const ERROR = 2;
 
 module.exports = exports = {
   "env": {
-    "node": true
+    "es6": true
+  },
+  "globals": {
+    "should": true,
+    "knock": true
   },
   "parserOptions": {
-    "ecmaVersion": 6
+    "ecmaVersion": 2017,
+    "sourceType": "module"
   },
   "rules": {
     // Possible Errors (overrides from recommended set)
@@ -115,7 +120,7 @@ module.exports = exports = {
 
     // Node.js and CommonJS
     "callback-return": [ WARN, [ "callback", "next" ]],
-    "global-require": ERROR,
+    "global-require": OFF,
     "handle-callback-err": WARN,
     "no-mixed-requires": WARN,
     "no-new-require": ERROR,

@@ -1,12 +1,19 @@
+const {
+  PROMPT_TYPE,
+  LIST_ITEM_SELECTED,
+  MENU_TEXT,
+  MENU_TITLE
+} = require('./.constants');
+
 function cardSelectPrompt(app) {
   const chooseCreditCardList = {
-    type: 'list',
-    name: 'selectedCardNumber',
-    message: 'Which credit card do you want to service VAN\'s for?',
+    type: PROMPT_TYPE.LIST,
+    name: LIST_ITEM_SELECTED,
+    message: MENU_TITLE.WHICH_CARD_TO_GENERATE_VANS_FOR,
     choices: []
   };
   chooseCreditCardList.choices.push({
-    name: app.chalk.yellow('<-- Exit'),
+    name: app.chalk.yellow(MENU_TEXT.EXIT),
     value: null
   });
   app.creditCards.forEach((card, i) => {
@@ -16,12 +23,14 @@ function cardSelectPrompt(app) {
     });
   });
 
-  return app.prompt(chooseCreditCardList).then((cardPromptResults) => {
-    if (cardPromptResults.selectedCardNumber === null) {
+  return app.prompt(chooseCreditCardList).then((promptResponse) => {
+    if (promptResponse[LIST_ITEM_SELECTED] === null) {
       return app.exitSelected();
     }
-    app.selectedCardNumber = cardPromptResults.selectedCardNumber;
-    app.selectedCard = app.creditCards[app.selectedCardNumber];
+
+    app[LIST_ITEM_SELECTED] = promptResponse[LIST_ITEM_SELECTED];
+    app.selectedCard = app.creditCards[app[LIST_ITEM_SELECTED]];
+
     return app.displayCardOptionsPrompt(app);
   });
 }

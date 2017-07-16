@@ -1,25 +1,40 @@
+const {
+  PROMPT_TYPE,
+  MENU_TITLE,
+  MENU_VALUE
+} = require('./.constants');
+
 function generateVanWithLimits(app) {
   return app.prompt([
     {
-      type: 'input',
-      message: 'What is the maximum dollar amount that can be spent on this card?',
-      name: 'spendLimit'
+      type: PROMPT_TYPE.INPUT,
+      message: MENU_TITLE.WHAT_IS_MAX_SPEND_LIMIT,
+      name: MENU_VALUE.SPEND_LIMIT
     },
     {
-      type: 'input',
-      message: 'How many months is this van good for?',
-      name: 'numberOfMonthsValidFor'
+      type: PROMPT_TYPE.INPUT,
+      message: MENU_TITLE.HOW_MANY_MONTHS_VAN_GOOD_FOR,
+      name: MENU_VALUE.NUMBER_OF_MONTHS_VALUD_FOR
     }
-  ]).then((limitedGenerateVanPromptResponse) => {
-    return app.van.generateVanForACreditCard(app.selectedCard, limitedGenerateVanPromptResponse.spendLimit, limitedGenerateVanPromptResponse.numberOfMonthsValidFor).then(results => {
+  ]).then((promptResponse) => {
+    return app.van.generateVanForACreditCard(
+      app.selectedCard,
+      promptResponse[MENU_VALUE.SPEND_LIMIT],
+      promptResponse[MENU_VALUE.NUMBER_OF_MONTHS_VALUD_FOR]
+    ).then(results => {
       if (results.twoFactorNeeded) {
         return app.displayTwoFactorPrompt(results).then(() => {
-          return app.van.generateVanForACreditCard(app.selectedCard, limitedGenerateVanPromptResponse.spendLimit, limitedGenerateVanPromptResponse.numberOfMonthsValidFor);
+          return app.van.generateVanForACreditCard(
+            app.selectedCard,
+            promptResponse[MENU_VALUE.SPEND_LIMIT],
+            promptResponse[MENU_VALUE.NUMBER_OF_MONTHS_VALUD_FOR]
+          );
         });
       }
+
       return results;
     }).then(newcard => {
-      console.log(app.chalk.green(`\n---new card generated--\n\n  ${newcard.PAN} EXP: ${newcard.Expiry} CVV: ${newcard.AVV} \n\n`));
+      app.log.success(`\n---new card generated--\n\n  ${newcard.PAN} EXP: ${newcard.Expiry} CVV: ${newcard.AVV} \n\n`);
       return app.displayCardOptionsPrompt();
     });
   });
