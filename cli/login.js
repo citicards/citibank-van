@@ -22,8 +22,8 @@ function loginPrompt(app) {
     app.log.warn(LOGGING_IN);
 
     return app.van.login(
-      promptResponse.USERNAME,
-      promptResponse.PASSWORD
+      promptResponse[USERNAME],
+      promptResponse[PASSWORD]
     ).then((creditCards) => {
       app.log.success(LOGIN_SUCCESS);
       app.creditCards = creditCards;

@@ -58,7 +58,7 @@ function cardOptionsPrompt(app) {
       case MENU_VALUE.GENERATE_VAN_WITH_LIMITS:
         return app.displayGenerateVanWithLimitsPrompt();
       case MENU_VALUE.BACK:
-        return app.displaypromptResponse();
+        return app.displayCardSelectPrompt();
       default:
         app.selectedVan = app.selectedCard.ActiveVans[Number(promptResponse[LIST_ITEM_SELECTED])];
         return app.displayServiceVanPrompt();

@@ -21,6 +21,7 @@ exports.MENU_TITLE = {
   ACTIVE_VANS: '----Active Vans----',
   NO_ACTIVE_VANS_FOUND: '  No Active Vans Found',
   WHAT_IS_MAX_SPEND_LIMIT: 'What is the maximum dollar amount that can be spent on this card?',
+  ENTER_CODE_RECEIVED: 'Enter the code you received from citibank',
   HOW_MANY_MONTHS_VAN_GOOD_FOR: 'How many months is this van good for?'
 };
 
