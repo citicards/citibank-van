@@ -1,5 +1,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
+![Citibank Virtual Account Numbers CLI](https://raw.githubusercontent.com/thomasmeadows/citibank-van/master/README.md)
+
 # Citibank Virtual Account Number Generator and Servicer
 
 Citibank and Citicards.com virtual account number generator for node js.  This tool was created so that virtual account numbers could be generated using an api or with the cli.  This is an unofficial tool not created by citibank and they should not be contacted for any issues regarding the tool.
