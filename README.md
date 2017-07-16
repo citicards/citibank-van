@@ -1,6 +1,6 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-![Citibank Virtual Account Numbers CLI](https://raw.githubusercontent.com/thomasmeadows/citibank-van/master/README.md)
+![Citibank Virtual Account Numbers CLI](https://raw.githubusercontent.com/thomasmeadows/citibank-van/master/cli.gif)
 
 # Citibank Virtual Account Number Generator and Servicer
 
