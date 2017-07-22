@@ -2,6 +2,8 @@
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
+[![codebeat badge](https://codebeat.co/badges/39218377-64b3-4293-b3b9-90013fead066)](https://codebeat.co/projects/github-com-thomasmeadows-citibank-van-master)
+
 [![Build Status](https://semaphoreci.com/api/v1/thomasmeadows/citibank-van/branches/master/badge.svg)](https://semaphoreci.com/thomasmeadows/citibank-van)
 
 ![Citibank Virtual Account Numbers CLI](https://raw.githubusercontent.com/thomasmeadows/citibank-van/master/cli.gif)
