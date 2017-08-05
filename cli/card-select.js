@@ -1,11 +1,11 @@
-const {
+import {
   PROMPT_TYPE,
   LIST_ITEM_SELECTED,
   MENU_TEXT,
   MENU_TITLE
-} = require('./.constants');
+} from './.constants';
 
-function cardSelectPrompt(app) {
+export default function cardSelectPrompt(app) {
   const chooseCreditCardList = {
     type: PROMPT_TYPE.LIST,
     name: LIST_ITEM_SELECTED,
@@ -34,5 +34,3 @@ function cardSelectPrompt(app) {
     return app.displayCardOptionsPrompt(app);
   });
 }
-
-module.exports = cardSelectPrompt;

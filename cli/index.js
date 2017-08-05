@@ -1,5 +1,7 @@
-#! /usr/bin/env node
-const App = require('./app');
+import App from './app';
+import sourceMap from 'source-map-support';
+
+sourceMap.install();
 
 const app = new App();
 app.init();

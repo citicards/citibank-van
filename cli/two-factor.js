@@ -1,10 +1,10 @@
-const {
+import {
   PROMPT_TYPE,
   LIST_ITEM_SELECTED,
   MENU_TITLE,
   MENU_VALUE,
   MENU_TEXT
-} = require('./.constants');
+} from './.constants';
 
 function twoFactorVerifyCodePrompt(app, twoFactor) {
   return app.prompt([
@@ -18,7 +18,7 @@ function twoFactorVerifyCodePrompt(app, twoFactor) {
   });
 }
 
-function twoFactorPrompt(app, twoFactor) {
+export default function twoFactorPrompt(app, twoFactor) {
   const chooseVerifyMethodList = {
     type: PROMPT_TYPE.LIST,
     name: LIST_ITEM_SELECTED,
@@ -53,5 +53,3 @@ function twoFactorPrompt(app, twoFactor) {
     });
   });
 }
-
-module.exports = twoFactorPrompt;

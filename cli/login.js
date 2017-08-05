@@ -1,12 +1,12 @@
-const {
+import {
   LOGGING_IN,
   LOGIN_SUCCESS,
   PROMPT_TYPE,
   PASSWORD,
   USERNAME
-} = require('./.constants');
+} from './.constants';
 
-function loginPrompt(app) {
+export default function loginPrompt(app) {
   return app.prompt([
     {
       type: PROMPT_TYPE.INPUT,
@@ -31,5 +31,3 @@ function loginPrompt(app) {
     });
   });
 };
-
-module.exports = loginPrompt;

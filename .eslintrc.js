@@ -4,9 +4,11 @@ const ERROR = 2;
 
 module.exports = exports = {
   "env": {
-    "node": true
+    "node": true,
+    "es6": true
   },
   "parserOptions": {
+    "sourceType": "module",
     "ecmaVersion": 6
   },
   "rules": {

@@ -1,21 +1,21 @@
-const chalk = require('chalk');
-const inquirer = require('inquirer');
+import CitibankVAN from '../lib';
+import chalk from 'chalk';
+import inquirer from 'inquirer';
 
-const CitibankVAN = require('../index.js');
-const loginPrompt = require('./login');
-const cardSelectPrompt = require('./card-select');
-const cardOptionsPrompt = require('./card-options');
-const serviceVanPrompt = require('./service-van');
-const twoFactorPrompt = require('./two-factor');
-const generateVanWithLimitsPrompt = require('./generate-van-with-limits');
+import loginPrompt from './login';
+import cardSelectPrompt from './card-select';
+import cardOptionsPrompt from './card-options';
+import serviceVanPrompt from './service-van';
+import twoFactorPrompt from './two-factor';
+import generateVanWithLimitsPrompt from './generate-van-with-limits';
 
-const {
+import {
   DISCLAIMER,
   MENU_TITLE,
   GOODBYE
-} = require('./.constants');
+} from './.constants';
 
-class App {
+export default class App {
   constructor() {
     this.van = new CitibankVAN();
     this.chalk = chalk;
@@ -70,5 +70,3 @@ class App {
     this.log.success(GOODBYE);
   }
 }
-
-module.exports = App;

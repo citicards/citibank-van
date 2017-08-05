@@ -1,12 +1,12 @@
-const {
+import {
   PROMPT_TYPE,
   LIST_ITEM_SELECTED,
   MENU_TITLE,
   MENU_TEXT,
   MENU_VALUE
-} = require('./.constants');
+} from './.constants';
 
-function serviceVan(app) {
+export default function serviceVan(app) {
   const chooseVanOption = {
     type: PROMPT_TYPE.LIST,
     name: LIST_ITEM_SELECTED,
@@ -37,5 +37,3 @@ function serviceVan(app) {
     return app.displayCardOptionsPrompt();
   });
 }
-
-module.exports = serviceVan;

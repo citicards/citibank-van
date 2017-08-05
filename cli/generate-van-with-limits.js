@@ -1,10 +1,10 @@
-const {
+import {
   PROMPT_TYPE,
   MENU_TITLE,
   MENU_VALUE
-} = require('./.constants');
+} from './.constants';
 
-function generateVanWithLimits(app) {
+export default function generateVanWithLimits(app) {
   return app.prompt([
     {
       type: PROMPT_TYPE.INPUT,
@@ -39,5 +39,3 @@ function generateVanWithLimits(app) {
     });
   });
 }
-
-module.exports = generateVanWithLimits;

@@ -1,3 +1,4 @@
+require('babel-register');
 const App = require('../../cli/app.js');
 const app = new App();
 
